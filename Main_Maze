@@ -1,0 +1,67 @@
+ /*
+
+*/ 
+int b;int c=3;int k=9;int m;int a=11;int d=2;int r=4;
+void setup() {Serial.begin(9600);pinMode(c,OUTPUT);pinMode(k,OUTPUT);pinMode(a,OUTPUT);pinMode(d,OUTPUT);
+    pinMode(6,OUTPUT);pinMode(7,OUTPUT);pinMode(r,OUTPUT);pinMode(13,OUTPUT);
+}
+
+void loop() {digitalWrite(13,HIGH);
+int g= analogRead(A4);
+int h= g/1000 +g/25+ g/40; 
+if(h>=63){
+  analogWrite(8,0);
+}if(h<63){
+  analogWrite(8,1200);
+}
+digitalWrite(c,LOW);delay(0.002);
+digitalWrite(c,HIGH);delay(0.01);digitalWrite(c,LOW);b=pulseIn(A0,HIGH); 
+int front=abs((b*0.034)/2);digitalWrite(k,LOW);
+delay(0.002);
+digitalWrite(k,HIGH);
+delay(0.01);
+digitalWrite(k,LOW);
+ m=pulseIn(A2,HIGH);
+int right =abs((m*0.034)/2);
+digitalWrite(r,LOW);delay(0.002);
+digitalWrite(r,HIGH);delay(0.1);
+digitalWrite(r,LOW);
+int p= pulseIn(A3,HIGH);
+int left  =abs((p*0.034)/2);
+
+Serial.println(front);Serial.println( right );Serial.println(left );
+if( front >90 && right>20 && left>20 ){digitalWrite(6,HIGH);digitalWrite(7,LOW);digitalWrite(d,HIGH);
+digitalWrite(a,LOW);}
+else if( front >90 && right<20 && left>20 ){digitalWrite(6,HIGH);digitalWrite(7,LOW);digitalWrite(d,HIGH);
+digitalWrite(a,LOW);}
+else if( front >90 && right>20 && left<20 ){digitalWrite(6,HIGH);digitalWrite(7,LOW);digitalWrite(d,HIGH);
+digitalWrite(a,LOW);}
+else if( front >90 && right<20 && left<20 ){digitalWrite(6,HIGH);digitalWrite(7,LOW);digitalWrite(d,HIGH);
+digitalWrite(a,LOW);}
+
+
+
+else if( front<90 && right >=left){
+  digitalWrite(6,HIGH);digitalWrite(7,LOW);digitalWrite(a,HIGH);digitalWrite(d,LOW);delay(250);
+  digitalWrite(6,LOW);digitalWrite(7,LOW);digitalWrite(a,LOW);digitalWrite(d,LOW);
+  
+}
+else if (front <90 &&  right <(left-20)){digitalWrite(6,LOW);digitalWrite(7,HIGH);digitalWrite(d,HIGH);
+digitalWrite(a,LOW);delay(250);
+digitalWrite(6,LOW);digitalWrite(7,LOW);digitalWrite(a,LOW);digitalWrite(d,LOW);
+}
+ 
+ 
+  
+  
+   
+/*if(d<=10){digitalWrite(k,HIGH);
+
+  
+}else{
+  digitalWrite(k,LOW);
+};
+max(100,)
+   d =analogRead(A0); 
+   Serial.println(d);*/
+}
